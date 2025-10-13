@@ -535,7 +535,9 @@ class Settings(BaseSettings):
         logger.debug(f"Components path: {value}")
         return value
 
-    model_config = SettingsConfigDict(validate_assignment=True, extra="ignore", env_prefix="LANGFLOW_")
+    model_config = SettingsConfigDict(
+        validate_assignment=True, extra="ignore", env_prefix="LANGFLOW_", env_ignore_empty=True
+    )
 
     async def update_from_yaml(self, file_path: str, *, dev: bool = False) -> None:
         new_settings = await load_settings_from_yaml(file_path)

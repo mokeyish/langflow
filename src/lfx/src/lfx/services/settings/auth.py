@@ -73,7 +73,9 @@ class AuthSettings(BaseSettings):
 
     pwd_context: CryptContext = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-    model_config = SettingsConfigDict(validate_assignment=True, extra="ignore", env_prefix="LANGFLOW_")
+    model_config = SettingsConfigDict(
+        validate_assignment=True, extra="ignore", env_prefix="LANGFLOW_", env_ignore_empty=True
+    )
 
     def reset_credentials(self) -> None:
         # Preserve the configured username but scrub the password from memory to avoid plaintext exposure.
